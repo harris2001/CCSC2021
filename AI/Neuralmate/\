@@ -1,0 +1,10 @@
+from pwn import *
+import base64
+import binascii
+#r = remote("192.168.125.11",4000)
+
+#print(r.recvuntil('\n'))
+
+with open("boards/board1.png","rb") as f:
+    img = f.read()
+print(base64.b64encode(img))

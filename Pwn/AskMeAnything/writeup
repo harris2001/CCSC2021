@@ -1,0 +1,4 @@
+checksec
+=> NX enable => no shellcode
+
+gets=>Buffer overflow!

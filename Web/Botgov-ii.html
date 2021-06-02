@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>Botgov-II Invitational</title>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+      integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+      integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      body {
+        display: block;
+        margin: 8px;
+        font-family: sans-serif;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        background: #f1f1f1
+      }
+      #boardz {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .info {
+        display: flex;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 8px;
+        background: #2f3237;
+        width: 244px;
+        padding: 4px;
+      }
+      .avatar {
+        height: 24px;
+        width: 24px;
+        border-radius: 100%;
+      }
+      .name {
+        margin: auto 0;
+        line-height: 24px;
+        height: 24px;
+        width: 100%;
+        text-align: right;
+        margin-right: 4px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .avatar-container {
+        text-align: center;
+      }
+      .botgov-avatar {
+        height: 100px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .lost { background: #831843 !important; }
+      .won { background: #064E3B !important; }
+      .draw { background: #1E40AF !important; }
+      .resign-container {
+        margin-top: 32px;
+        text-align: center;
+      }
+      #btn-resign {
+        background: #831843;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 4px;
+        border: none;
+        padding: 8px 32px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="avatar-container">
+      <img class="botgov-avatar" src="https://64.media.tumblr.com/f562994c3cc048ef42a7ed049cfaa420/d00460aa8939249b-1f/s540x810/8eee74137c7ce9b1dce6845e2f4aaf34386b5be6.gifv">
+    </div>
+    <div id="boardz">
+      <div>
+  <div id="493305218864381982" style="width: 256px"></div>
+  <div id="493305218864381982-info" class="info lost">
+    <img class="avatar" src="https://discord.com/assets/6debd47ed13483642cf09e832ed0bc1b.png"/>
+    <span class="name">Harris01</span>
+  </div>
+</div>
+    </div>
+    <div class="resign-container">
+      <button id="btn-resign" onclick="resign()">RESIGN</button>
+    </div>
+  </body>
+
+  <footer>
+    <script>
+      window.boards = {};
+      window.boards['493305218864381982'] = Chessboard('493305218864381982',{pieceTheme:'https://raw.githubusercontent.com/oakmac/chessboardjs/master/website/img/chesspieces/alpha/{piece}.png',position: 'qqqqkqqq/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1'})
+
+      function onNewEvent(b) {
+        if (b.type === 'move') {
+          if (b.id in window.boards) {
+            window.boards[b.id].position(b.fen);
+          }
+          $('#' + b.id + '-info')[0].className = 'info'; 
+        } else if (b.type === 'scores') {
+          if (b.outcome === 'PLAYER_WINS') {
+            $('#' + b.id + '-info')[0].className = 'info won'; 
+          } else if (b.outcome === 'BOTGOV_WINS') {
+            $('#' + b.id + '-info')[0].className = 'info lost'; 
+          } else if (b.outcome === 'DRAWS') {
+            $('#' + b.id + '-info')[0].className = 'info draw'; 
+          }
+        }
+      }
+
+      var events = new EventSource(window.location.pathname + '/events');
+      events.onmessage = function(event) {
+        onNewEvent(JSON.parse(event.data));
+      };
+
+      function resign() {
+        fetch(window.location.pathname + '/resign')
+      }
+
+    </script>
+  </footer>
+</html>

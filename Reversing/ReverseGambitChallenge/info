@@ -1,0 +1,29 @@
+Hash = -0x1a76b7ab = 0xe5894855
+
+0x34a0498c315c8c91
+
+0x555555601020: 0x315c8c91      0x34a0498c 0x9c224d8c   0x9594857d
+0x555555601030: 0x95948585      0xf66d8c85 0xeef7f6e6   0x9ce6b6f3
+0x555555601040: 0x5d9d0cf5      0xec6d8cc3 0xe6a0e0da   0x9cf7dafc
+0x555555601050: 0x5d9d0cf5      0x6c9dcc83 0xf9f8b1ed   0xd4d5c4f8
+0x555555601060: 0x9c1df58c      0x6cc5834d 0xd4d5c4c5   0xd4d5d17e
+0x555555601070: 0xdb124dc4      0xb21699c1 0xd451dbcb   0xd4d5c4c4
+
+a1,a2,a3,...,a24
+
+a1a2^input[3:]
+store(a2'a1')
+
+a3a2'^input[3:]
+store(a2''a3')
+.
+.
+.
+
+so if we provide a key wich when xored with a2 gives us 0xe5894855 we can get the flag
+
+=> 0xe5894855^0x315c8c91=0xd4d5c4c4
+
+./challenge d4d5c4c4
+ccsc{v3ry_e4sy_ch4ll}
+

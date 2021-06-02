@@ -1,0 +1,16 @@
+#!/bin/bash
+set -ex
+cd $(dirname $0)/..
+unzip qpdf-external-libs-src.zip
+tar xzf external-libs-src/jpegsrc*
+cd jpeg-*
+./configure
+make -k
+sudo make install
+cd ..
+if [ -f distfiles/distfiles.zip ]; then
+    unzip distfiles/distfiles.zip
+fi
+./configure --enable-werror --enable-show-failed-test-output
+make -j$(nproc) -k
+make -k check

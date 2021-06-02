@@ -1,0 +1,21 @@
+-rwsr-xr-x 1 root root 44784 May 28  2020 /usr/bin/newgrp                                                             
+-rwsr-xr-x 1 root root 68208 May 28  2020 /usr/bin/passwd                                                             
+-rwsr-xr-x 1 root root 53040 May 28  2020 /usr/bin/chsh
+-rwsr-xr-x 1 root root 39144 Jul 21  2020 /usr/bin/umount
+-rwsr-xr-x 1 root root 88464 May 28  2020 /usr/bin/gpasswd 
+-rwsr-xr-x 1 root root 85064 May 28  2020 /usr/bin/chfn                                                               
+-rwsr-xr-x 1 root root 55528 Jul 21  2020 /usr/bin/mount                                                              
+-rwsr-xr-x 1 root root 67816 Jul 21  2020 /usr/bin/su     
+-rwsr-xr-- 1 root messagebus 51344 Jun 11  2020 /usr/lib/dbus-1.0/dbus-daemon-launch-helper                           
+-rwsr-xr-x 1 root root 473576 Mar  9 14:17 /usr/lib/openssh/ssh-keysign                                               
+hax@0e8da1d392af:~$ find / -uid 0 -perm -4000 -type f 2>/dev/null                                                     
+/usr/bin/newgrp                                                                                                       
+/usr/bin/passwd                                            
+/usr/bin/chsh                                              
+/usr/bin/umount                                                                                                       
+/usr/bin/gpasswd                                                                                                      
+/usr/bin/chfn                                              
+/usr/bin/mount                                             
+/usr/bin/su                                                                                                           
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper                
+/usr/lib/openssh/ssh-keysign

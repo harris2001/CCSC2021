@@ -1,0 +1,6 @@
+1. fdisk -lu Exchanges.dd 
+2. dd if=Exchanges.dd of=part1 bs=512 skip=84
+3. string part1
+4."Q0NTQ3tJ4oCZbSBnb25uYSBiZSBhIHJhZGljYWwufQ==" |base64 -d
+flag=CCSC{I’m gonna be a radical.}
+
